@@ -1,0 +1,89 @@
+body {background-color:honeydew;font-family: tahoma,sans-serif;font-size: 14px;}
+h1 {font-family: tahoma,sans-serif;font-size: 14px;color: red;}
+h2 {font-family: tahoma,sans-serif;font-size: 13px;color: red;}
+table {border-collapse:collapse;}
+td {font-family: tahoma,sans-serif;font-size: 13px;}
+th {background-color:gainsboro;color:darkblue;border:1px solid black;font-family: tahoma,sans-serif;font-size: 13px;}
+tr.hlight td {background-color:gainsboro;font-weight: bold;}
+
+#task-report-list {
+    margin-top: 50px;
+}
+
+#task-report-list td {
+    padding: 10px;
+}
+
+.list-cell {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.panel-buttons {
+    width: 50px;
+    flex-basis: auto;
+    flex-grow: 1;
+}
+
+.sb-button {
+    width: 100%;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.sections-tab {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-options {
+    width: 100%;
+    margin: 10px 2.5%;
+}
+
+#form-nav {
+    /* -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex; */
+    display: flex;
+}
+
+.progress {
+    flex-grow: 1;
+}
+
+.tab-navigation-btn {
+    background-color: transparent;
+    /* border: 2px solid #bcb8b8!important; */
+}
+
+.tab-navigation-btn:enabled:hover {
+    background-color: #007bff;
+    /* color: white; */
+}
+ 
+.tab-navigation-btn:enabled:hover i {
+    color: white!important;
+}
+
+@media (min-width: 768px) {
+
+    .container {
+        width: 65% !important;
+    }
+    
+    .btn-options {
+        width: 45%;
+    }
+
+    .tab-navigation-btn {
+        border: 2px solid #bcb8b8!important;
+    }
+}
+
+.activity input[type="checkbox"]
