@@ -77,10 +77,9 @@
                     $result = $conn->query($sql);
 
                     while($row = $result->fetch_assoc()) {
-                        echo '<button class="btn btn-outline-secondary btn-options" onclick="onClick('. "'section'" .', '. $row["section_id"] .')">' . $row["section_name"] . '</button>' . "\n";
+                        echo '<button class="btn btn-outline-secondary btn-options" onclick="handle($row["section_id"], e); onClick('. "'section'" .', '. $row["section_id"] .')">' . $row["section_name"] . '</button>' . "\n";
                     }
                 ?>
-
             </div>
         </div>
 
@@ -97,11 +96,15 @@
         <div class="tab d-none">
             <span>Choose activities to be performed:</span>
             <div id="activities"></div>
-
             <div>
                 <label for="taskDescription" style="display: block;">Describe task:</label>
                 <textarea id="taskDescription" class="w-100" onkeyup="handleChange();"></textarea>
             </div>
+        </div>
+
+        <div class="tab d-none">
+            <span>Choose the employees you would like to perform the task:</span>
+            <div id="staff" class="list-group"></div>
         </div>
 
         <div class="w-100 mt-4">
@@ -117,12 +120,25 @@
             </div>
         </div>
     </div>
+    <script type="module">
+        import TabNavigator from "./app/js/modules/assignTask/tab-navigation.mjs";
+        import ChoiceHandler from "./app/js/modules/assignTask/choice-handler.mjs";
 
-    <script>
+        window.handle = ChoiceHandler.handle;
+        
+        const tabs = document.getElementsByClassName("tab");
+
+        const tabNavigator = new TabNavigator(tabs);
+        tabNavigator.showFirstTab();
+
+    </script>
+
+    <script nomodule>
 
         const SECTION_TAB = "section";
         const FACILITY_TAB = "facility";
         const COMPONENT_TAB = "component";
+        const ACTIVITY_DESCRIPTION_TAB = "activity_description";
 
         var choices = [];
 
@@ -131,9 +147,14 @@
         let currentTab = 0;
         showTab(currentTab);
 
+        /*
+        Tab navigation functions
+        */
         function showTab(tab) {
             tabs[tab].classList.remove("d-none");
             updateProgressBar();
+
+            document.getElementById("btn-next").style.display = "none";
         }
 
         function updateProgressBar() {
@@ -145,14 +166,16 @@
         function nextTab() {
             tabs[currentTab].classList.add("d-none");
             showTab(++currentTab);
-
-            // updateProgressBar();
         }
 
         function previousTab() {
             tabs[currentTab].classList.add("d-none");
             showTab(--currentTab);
         }
+        /*
+        Tab navigation functions
+        */
+
 
         function onClick(tab, choice) {
             switch (tab) {
@@ -167,7 +190,10 @@
                 case COMPONENT_TAB:
                     new ComponentChoice(choice).handleChoice();
                     break;
-                    
+
+                case ACTIVITY_DESCRIPTION_TAB:
+                    renderStaffListForSection(choices["sectionChoice"]);
+                    break;
 
                 default:
                     break;
@@ -177,5 +203,6 @@
     </script>
     <script src="choice.js"></script>
     <script src="activitiesAndDescriptionTab.js"></script>
+    <script src="staffListTab.js"></script>
 </body>
 </html>

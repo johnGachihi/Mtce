@@ -8,7 +8,6 @@ function handleActivitiesCheckboxChange(event) {
     } else {
         removeByValue(chosenActivities, event.target.value);
     }
-    console.log("Chosen activities:", chosenActivities);
 }
 
 function removeByValue(array, value) {
@@ -31,7 +30,6 @@ function handleChange() {
     } else {
         nextButton.style.display = "none";
     }
-    console.log("Something changed");
 }
 
 nextButton.addEventListener("click", () => {
@@ -39,4 +37,5 @@ nextButton.addEventListener("click", () => {
     choices["taskDescription"] = taskDescriptionTextArea.value;
 
     console.log("Choices:", choices);
+    onClick(ACTIVITY_DESCRIPTION_TAB, null);
 })
